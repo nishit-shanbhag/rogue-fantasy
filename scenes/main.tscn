@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://utp5bdeobb4m"]
+
+[ext_resource type="PackedScene" uid="uid://dlvxo4rrvcdls" path="res://scenes/player.tscn" id="1_kuefi"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_rn33f"]
+[ext_resource type="Script" path="res://scripts/classes/player.gd" id="2_por5g"]
+[ext_resource type="PackedScene" uid="uid://dyj2y8gpkjife" path="res://scenes/enemy.tscn" id="4_vqakl"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="5_xfph3"]
+[ext_resource type="Texture2D" uid="uid://dsq8mklbxw853" path="res://resources/enemy.png" id="6_57ep4"]
+[ext_resource type="Script" path="res://scripts/health_component.gd" id="7_x80r2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pd4d"]
+size = Vector2(58, 64)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_rn33f")
+
+[node name="Player" parent="." instance=ExtResource("1_kuefi")]
+position = Vector2(75, 32)
+script = ExtResource("2_por5g")
+
+[node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("4_vqakl")]
+position = Vector2(9, 10)
+script = ExtResource("5_xfph3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+position = Vector2(21, 22.25)
+scale = Vector2(0.0566406, 0.0639648)
+texture = ExtResource("6_57ep4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(21, 23)
+shape = SubResource("RectangleShape2D_6pd4d")
+
+[node name="HealthComponent" type="Node2D" parent="Enemy"]
+script = ExtResource("7_x80r2")
